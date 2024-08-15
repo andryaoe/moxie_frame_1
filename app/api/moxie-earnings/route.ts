@@ -68,11 +68,8 @@ export async function GET(req: NextRequest) {
         `Error fetching Today's Moxie earnings data from Airstack for entityId: ${entityId} with error: ${todayData.error}`
       );
     } else {
-      console.log("Airstack API response (Today's Moxie earnings data - inside )):",JSON.stringify( {today: todayData.data,},null,2));
-      console.log("1. is var null? ",JSON.stringify( {today: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat==null, },null,2));
       
-      //if (!(todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat == null) && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
-      //if (todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
+      if (!(todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat == null) && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
         todayEarnings = {
           allEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.allEarningsAmount || 0,
           frameDevEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.frameDevEarningsAmount || 0,
@@ -81,7 +78,16 @@ export async function GET(req: NextRequest) {
           castEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.castEarningsAmount || 0,
           otherEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.otherEarningsAmount || 0,
         };
-      //}
+      } else {
+        todayEarnings = {
+          allEarningsAmount: 0,
+          frameDevEarningsAmount: 0,
+          entityId: entityId || "Unknown",
+          entityType: "USER",
+          castEarningsAmount: 0,
+          otherEarningsAmount: 0,
+        };
+      }
     }
 
     console.log(
@@ -107,17 +113,26 @@ export async function GET(req: NextRequest) {
         `Error fetching Weekly Moxie earnings data from Airstack for entityId: ${entityId} with error: ${weeklyData.error}`
       );
     } else {
-      /*if (weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
-        weeklyEarnings = weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0];
-      }*/
-      weeklyEarnings = {
-        allEarningsAmount: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.allEarningsAmount || 0,
-        frameDevEarningsAmount: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.frameDevEarningsAmount || 0,
-        entityId: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.entityId || entityId || "Unknown",
-        entityType: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.entityType || "USER",
-        castEarningsAmount: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.castEarningsAmount || 0,
-        otherEarningsAmount: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.otherEarningsAmount || 0,
-      };
+      if (!(weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat == null) && weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
+        weeklyEarnings = {
+          allEarningsAmount: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.allEarningsAmount || 0,
+          frameDevEarningsAmount: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.frameDevEarningsAmount || 0,
+          entityId: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.entityId || entityId || "Unknown",
+          entityType: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.entityType || "USER",
+          castEarningsAmount: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.castEarningsAmount || 0,
+          otherEarningsAmount: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.otherEarningsAmount || 0,
+        };
+      } else {
+        weeklyEarnings = {
+          allEarningsAmount: 0,
+          frameDevEarningsAmount: 0,
+          entityId: entityId || "Unknown",
+          entityType: "USER",
+          castEarningsAmount: 0,
+          otherEarningsAmount: 0,
+        };
+      }
+      
     }
 
     console.log(
@@ -143,17 +158,26 @@ export async function GET(req: NextRequest) {
         `Error fetching Lifetime Moxie earnings data from Airstack for entityId: ${entityId} with error: ${lifetimeData.error}`
       );
     } else {
-      /*if (lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
-        lifetimeEarnings = lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0];
-      }*/
-      lifetimeEarnings = {
-        allEarningsAmount: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.allEarningsAmount || 0,
-        frameDevEarningsAmount: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.frameDevEarningsAmount || 0,
-        entityId: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.entityId || entityId || "Unknown",
-        entityType: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.entityType || "USER",
-        castEarningsAmount: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.castEarningsAmount || 0,
-        otherEarningsAmount: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.otherEarningsAmount || 0,
-      };
+      if (!(lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat == null) && lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
+        lifetimeEarnings = {
+          allEarningsAmount: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.allEarningsAmount || 0,
+          frameDevEarningsAmount: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.frameDevEarningsAmount || 0,
+          entityId: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.entityId || entityId || "Unknown",
+          entityType: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.entityType || "USER",
+          castEarningsAmount: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.castEarningsAmount || 0,
+          otherEarningsAmount: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.otherEarningsAmount || 0,
+        };
+      } else {
+        lifetimeEarnings = {
+          allEarningsAmount: 0,
+          frameDevEarningsAmount: 0,
+          entityId: entityId || "Unknown",
+          entityType: "USER",
+          castEarningsAmount: 0,
+          otherEarningsAmount: 0,
+        };
+      }
+      
     }
 
     console.log(
