@@ -147,9 +147,9 @@ const frameHandler = frames(async (ctx) => {
       </div>
       <div tw="flex justify-between bg-blue-800 text-white mb-4 w-full px-4 py-1 text-center absolute top-50 p-10 bg-opacity-80">
         <div tw="flex flex-col items-center w-full">
-          <span tw="flex text-6xl  mb-4">Moxie Demo Frame</span>
+          <span tw="flex text-6xl  mb-4">Moxie Stats Frame</span>
           <span tw="flex text-4xl ">
-            Use this to build your Moxie Stats Frame.
+            Use this to get your latest Moxie Stats and Engagement Scores.
           </span>
         </div>
       </div>
@@ -249,12 +249,12 @@ const frameHandler = frames(async (ctx) => {
           (userData as UserData).socialCapitalScore
         } with a rank of ${
           (userData as UserData).socialCapitalRank
-        }! The higher the score, the more my reactions help you earn Moxie. Check out your score on moxiedemo, made by Zenigame (@zeni.eth)`
+        }! The higher the score, the more my reactions help you earn Moxie. Check out your score on moxie-stats-frame, made by Demipoet (@demipoet)`
       : "Check out your Moxie Far Score!"
   );
 
   // Change the url here
-  const shareUrl = `https://warpcast.com/~/compose?text=${shareText}&embeds[]=https://moxiedemo.vercel.app/frames${
+  const shareUrl = `https://warpcast.com/~/compose?text=${shareText}&embeds[]=https://moxie-stats-frame.vercel.app/frames${
     fid ? `?userfid=${fid}` : ""
   }`;
 
@@ -268,13 +268,13 @@ const frameHandler = frames(async (ctx) => {
       <Button
         action="link"
         // Change the url here
-        target="https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fmoxiedemo.vercel.app%2Fapi%2Fcast-action"
+        target="https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fmoxie-stats-frame.vercel.app%2Fapi%2Fcast-action"
       >
         Cast Action
       </Button>,
       <Button
         action="link"
-        target="https://github.com/leeknowlton/farcaster-frame-airstack-moxie"
+        target="https://github.com/demipoet/moxie-stats-frame"
       >
         Frame Repo
       </Button>
@@ -289,7 +289,7 @@ const frameHandler = frames(async (ctx) => {
       </Button>,
       <Button
         action="link"
-        target="https://github.com/leeknowlton/farcaster-frame-airstack-moxie"
+        target="https://github.com/demipoet/moxie-stats-frame"
       >
         Frame Repo
       </Button>
