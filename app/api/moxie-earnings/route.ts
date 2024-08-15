@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    var todayEarnings, weeklyEarnings, lifetimeEarnings: any = {
+    var todayEarnings: any, weeklyEarnings: any, lifetimeEarnings: any = {
       allEarningsAmount: 0,
       frameDevEarningsAmount: 0,
       entityId: entityId,
@@ -76,7 +76,7 @@ export async function GET(req: NextRequest) {
       "Airstack API response (Today's Moxie earnings data):",
       JSON.stringify(
         {
-          today: todayEarnings,
+          today: <JSON>todayEarnings,
         },
         null,
         2
