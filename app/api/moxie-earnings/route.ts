@@ -65,7 +65,14 @@ export async function GET(req: NextRequest) {
       );
     } else {
       if (todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
-        todayEarnings = todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0];
+        todayEarnings = {
+          allEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].allEarningsAmount || 0,
+          frameDevEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].frameDevEarningsAmount || 0,
+          entityId: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].entityId || entityId || "",
+          entityType: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].entityType || "USER",
+          castEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].castEarningsAmount || 0,
+          otherEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].otherEarningsAmount || 0
+        };
       }
     }
 
