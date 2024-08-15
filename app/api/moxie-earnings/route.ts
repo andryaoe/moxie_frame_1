@@ -64,8 +64,10 @@ export async function GET(req: NextRequest) {
     ]);
 
     if (todayData.error) {
-      console.log(
-        `Error fetching Today's Moxie earnings data from Airstack for entityId: ${entityId} with error: ${todayData.error}`
+      console.error("Airstack API error (today's Moxie earnings data):", todayData.error);
+      return NextResponse.json(
+        { error: todayData.error.message },
+        { status: 500 }
       );
     } else {
       
@@ -109,8 +111,10 @@ export async function GET(req: NextRequest) {
     ]);
 
     if (weeklyData.error) {
-      console.log(
-        `Error fetching Weekly Moxie earnings data from Airstack for entityId: ${entityId} with error: ${weeklyData.error}`
+      console.error("Airstack API error (weekly Moxie earnings data):", weeklyData.error);
+      return NextResponse.json(
+        { error: weeklyData.error.message },
+        { status: 500 }
       );
     } else {
       if (!(weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat == null) && weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
@@ -154,8 +158,10 @@ export async function GET(req: NextRequest) {
     ]);
 
     if (lifetimeData.error) {
-      console.log(
-        `Error fetching Lifetime Moxie earnings data from Airstack for entityId: ${entityId} with error: ${lifetimeData.error}`
+      console.error("Airstack API error (lifetime Moxie earnings data):", lifetimeData.error);
+      return NextResponse.json(
+        { error: lifetimeData.error.message },
+        { status: 500 }
       );
     } else {
       if (!(lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat == null) && lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
