@@ -18,5 +18,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  return <div>Moxie Stats Frame Example</div>;
+  return <div>Moxie Stats Frame</div>;
 }

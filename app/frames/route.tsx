@@ -271,12 +271,6 @@ const frameHandler = frames(async (ctx) => {
         target="https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fmoxie-stats-frame.vercel.app%2Fapi%2Fcast-action"
       >
         Cast Action
-      </Button>,
-      <Button
-        action="link"
-        target="https://github.com/demipoet/moxie-stats-frame"
-      >
-        Frame Repo
       </Button>
     );
   } else {
