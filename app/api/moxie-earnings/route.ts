@@ -42,14 +42,18 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    var todayEarnings: any, weeklyEarnings: any, lifetimeEarnings: any = {
-      allEarningsAmount: 0,
-      frameDevEarningsAmount: 0,
-      entityId: entityId,
-      entityType: "USER",
-      castEarningsAmount: 0,
-      otherEarningsAmount: 0
-    };
+    interface MoxieEarningStat {
+      allEarningsAmount: number;
+      frameDevEarningsAmount: number;
+      entityId: string;
+      entityType: string;
+      castEarningsAmount: number;
+      otherEarningsAmount: number;
+    }
+
+    let todayEarnings: MoxieEarningStat | null = null;
+    let weeklyEarnings: MoxieEarningStat | null = null;
+    let lifetimeEarnings: MoxieEarningStat | null = null;
 
     console.log(
       `Fetching Today's Moxie earnings data from Airstack for entityId: ${entityId}`
@@ -68,7 +72,14 @@ export async function GET(req: NextRequest) {
       console.log("1. is var null? ",JSON.stringify( {today: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat==null, },null,2));
       
       if (!(todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat == null) && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
-        todayEarnings = todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0];
+        todayEarnings = {
+          allEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].allEarningsAmount || 0,
+          frameDevEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].frameDevEarningsAmount || 0,
+          entityId: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].entityId || entityId || "Unknown",
+          entityType: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].entityType || "USER",
+          castEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].castEarningsAmount || 0,
+          otherEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].otherEarningsAmount || 0,
+        };
       }
     }
 
@@ -76,7 +87,7 @@ export async function GET(req: NextRequest) {
       "Airstack API response (Today's Moxie earnings data):",
       JSON.stringify(
         {
-          today: <JSON>todayEarnings,
+          today: todayEarnings,
         },
         null,
         2
