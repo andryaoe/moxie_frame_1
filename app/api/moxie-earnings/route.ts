@@ -62,18 +62,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    console.log(
-      "Airstack API response (Moxie earnings data):",
-      JSON.stringify(
-        {
-          today: todayData.data,
-          weekly: weeklyData.data,
-          lifetime: lifetimeData.data,
-        },
-        null,
-        2
-      )
-    );
+    
 
     var todayEarningStat = {
       allEarningsAmount: 0,
@@ -86,6 +75,19 @@ export async function GET(req: NextRequest) {
     if (!todayData.error) {
       todayEarningStat = todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0];
     }
+
+    console.log(
+      "Airstack API response (Moxie earnings data):",
+      JSON.stringify(
+        {
+          today: todayEarningStat,
+          weekly: weeklyData.data,
+          lifetime: lifetimeData.data,
+        },
+        null,
+        2
+      )
+    );
 
     return NextResponse.json({
       today:
