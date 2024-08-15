@@ -64,7 +64,7 @@ export async function GET(req: NextRequest) {
         `Error fetching Today's Moxie earnings data from Airstack for entityId: ${entityId} with error: ${todayData.error}`
       );
     } else {
-      if (todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
+      if (todayData.data != null && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
         todayEarnings = {
           allEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].allEarningsAmount || 0,
           frameDevEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].frameDevEarningsAmount || 0,
