@@ -64,6 +64,8 @@ export async function GET(req: NextRequest) {
         `Error fetching Today's Moxie earnings data from Airstack for entityId: ${entityId} with error: ${todayData.error}`
       );
     } else {
+      console.log("Airstack API response (Today's Moxie earnings data - inside):",JSON.stringify( {today: todayData.data,},null,2));
+
       if (todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat != null && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
         todayEarnings = {
           allEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].allEarningsAmount || 0,
@@ -133,7 +135,7 @@ export async function GET(req: NextRequest) {
     }
 
     console.log(
-      "Airstack API response (Moxie earnings data):",
+      "Airstack API response (Lifetime Moxie earnings data):",
       JSON.stringify(
         {
           lifetime: lifetimeEarnings,
