@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Moxie Stats Frame Example",
+    title: "Moxie Stats Frame by Demipoet",
     other: {
       ...(await fetchMetadata(
         new URL(

@@ -12,7 +12,7 @@ export const GET = async (req: NextRequest) => {
     icon: "pulse",
     name: "Moxie Stats Frame",
     aboutUrl: `${appURL()}`,
-    description: "Use this as a base to build moxie stats frames",
+    description: "Use this frame to retrieve your Moxie Stats and Engagement Scores",
   });
 };
 
