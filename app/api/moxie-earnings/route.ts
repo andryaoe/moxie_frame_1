@@ -67,15 +67,8 @@ export async function GET(req: NextRequest) {
       console.log("Airstack API response (Today's Moxie earnings data - inside )):",JSON.stringify( {today: todayData.data,},null,2));
       console.log("1. is var null? ",JSON.stringify( {today: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat==null, },null,2));
       
-      if (todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat != null && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
-        todayEarnings = {
-          allEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].allEarningsAmount || 0,
-          frameDevEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].frameDevEarningsAmount || 0,
-          entityId: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].entityId || entityId || "",
-          entityType: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].entityType || "USER",
-          castEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].castEarningsAmount || 0,
-          otherEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].otherEarningsAmount || 0
-        };
+      if (!(todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat == null) && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
+        todayEarnings = todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0];
       }
     }
 
