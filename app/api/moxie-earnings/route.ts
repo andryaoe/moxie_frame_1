@@ -72,14 +72,7 @@ export async function GET(req: NextRequest) {
     } else {
       
       if (!(todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat == null) && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
-        todayEarnings = {
-          allEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.allEarningsAmount || 0,
-          frameDevEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.frameDevEarningsAmount || 0,
-          entityId: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.entityId || entityId || "Unknown",
-          entityType: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.entityType || "USER",
-          castEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.castEarningsAmount || 0,
-          otherEarningsAmount: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.otherEarningsAmount || 0,
-        };
+        todayEarnings = todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0];
       } else {
         todayEarnings = {
           allEarningsAmount: 0,
@@ -118,14 +111,7 @@ export async function GET(req: NextRequest) {
       );
     } else {
       if (!(weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat == null) && weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
-        weeklyEarnings = {
-          allEarningsAmount: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.allEarningsAmount || 0,
-          frameDevEarningsAmount: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.frameDevEarningsAmount || 0,
-          entityId: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.entityId || entityId || "Unknown",
-          entityType: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.entityType || "USER",
-          castEarningsAmount: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.castEarningsAmount || 0,
-          otherEarningsAmount: weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.otherEarningsAmount || 0,
-        };
+        weeklyEarnings = weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0];
       } else {
         weeklyEarnings = {
           allEarningsAmount: 0,
@@ -165,14 +151,7 @@ export async function GET(req: NextRequest) {
       );
     } else {
       if (!(lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat == null) && lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
-        lifetimeEarnings = {
-          allEarningsAmount: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.allEarningsAmount || 0,
-          frameDevEarningsAmount: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.frameDevEarningsAmount || 0,
-          entityId: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.entityId || entityId || "Unknown",
-          entityType: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.entityType || "USER",
-          castEarningsAmount: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.castEarningsAmount || 0,
-          otherEarningsAmount: lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.otherEarningsAmount || 0,
-        };
+        lifetimeEarnings = lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0];
       } else {
         lifetimeEarnings = {
           allEarningsAmount: 0,
