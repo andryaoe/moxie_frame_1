@@ -51,10 +51,10 @@ export async function GET(req: NextRequest) {
       fetchQuery(moxieQuery, { entityId, timeframe: "LIFETIME" }),
     ]);
 
-    if (todayData.error || weeklyData.error || lifetimeData.error) {
+    if (todayData.error && weeklyData.error && lifetimeData.error) {
       console.error(
         "Airstack API error:",
-        todayData.error || weeklyData.error || lifetimeData.error
+        todayData.error && weeklyData.error && lifetimeData.error
       );
       return NextResponse.json(
         { error: "Error fetching Moxie earnings data" },
@@ -75,9 +75,21 @@ export async function GET(req: NextRequest) {
       )
     );
 
+    var todayEarningStat = {
+      allEarningsAmount: 0,
+      frameDevEarningsAmount: 0,
+      entityId: entityId,
+      entityType: "USER",
+      castEarningsAmount: 0,
+      otherEarningsAmount: 0
+    };
+    if (!todayData.error) {
+      todayEarningStat = todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0];
+    }
+
     return NextResponse.json({
       today:
-        todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0],
+        todayEarningStat,
       weekly:
         weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0],
       lifetime:
