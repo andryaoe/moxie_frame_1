@@ -65,9 +65,9 @@ export async function GET(req: NextRequest) {
       );
     } else {
       console.log("Airstack API response (Today's Moxie earnings data - inside )):",JSON.stringify( {today: todayData.data,},null,2));
-      console.log("1. is var null? "+todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat==null);
-      console.log("2. is var null? "+todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.allEarningsAmount==null);
-      console.log("3. is var null? "+todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].allEarningsAmount==null);
+      console.log("1. is var null? ",JSON.stringify( {today: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat==null, },null,2));
+      console.log("2. is var null? ",JSON.stringify( {today: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.allEarningsAmount==null, },null,2));
+      console.log("3. is var null? ",JSON.stringify( {today: todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0].allEarningsAmount==null, },null,2));
       
       if (todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat != null && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
         todayEarnings = {
