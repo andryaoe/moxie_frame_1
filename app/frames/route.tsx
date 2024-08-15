@@ -236,9 +236,9 @@ const frameHandler = frames(async (ctx) => {
           </div>
         </div>
         <div tw="flex justify-between bg-blue-800 text-white w-full px-4 py-1 mt-4">
-          <div tw="flex text-2xl ">Moxie Stats Demo Frame</div>
+          <div tw="flex text-2xl ">Moxie Stats Frame</div>
 
-          <div tw="flex text-2xl">by @zeni.eth</div>
+          <div tw="flex text-2xl">by @demipoet</div>
         </div>
       </div>
     );
@@ -286,12 +286,6 @@ const frameHandler = frames(async (ctx) => {
       </Button>,
       <Button action="link" target={shareUrl}>
         Share
-      </Button>,
-      <Button
-        action="link"
-        target="https://github.com/demipoet/moxie-stats-frame"
-      >
-        Frame Repo
       </Button>
     );
   }
