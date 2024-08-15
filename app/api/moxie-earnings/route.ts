@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    var todayEarnings, weeklyEarnings, lifetimeEarnings = {
+    var todayEarnings, weeklyEarnings, lifetimeEarnings: any = {
       allEarningsAmount: 0,
       frameDevEarningsAmount: 0,
       entityId: entityId,
