@@ -42,29 +42,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    console.log(
-      `Fetching Moxie earnings data from Airstack for entityId: ${entityId}`
-    );
-    const [todayData, weeklyData, lifetimeData] = await Promise.all([
-      fetchQuery(moxieQuery, { entityId, timeframe: "TODAY" }),
-      fetchQuery(moxieQuery, { entityId, timeframe: "WEEKLY" }),
-      fetchQuery(moxieQuery, { entityId, timeframe: "LIFETIME" }),
-    ]);
-
-    if (todayData.error && weeklyData.error && lifetimeData.error) {
-      console.error(
-        "Airstack API error:",
-        todayData.error && weeklyData.error && lifetimeData.error
-      );
-      return NextResponse.json(
-        { error: "Error fetching Moxie earnings data" },
-        { status: 500 }
-      );
-    }
-
-    
-
-    var todayEarningStat = {
+    var todayEarnings, weeklyEarnings, lifetimeEarnings = {
       allEarningsAmount: 0,
       frameDevEarningsAmount: 0,
       entityId: entityId,
@@ -72,17 +50,86 @@ export async function GET(req: NextRequest) {
       castEarningsAmount: 0,
       otherEarningsAmount: 0
     };
-    if (!todayData.error) {
-      todayEarningStat = todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0];
+
+    console.log(
+      `Fetching Today's Moxie earnings data from Airstack for entityId: ${entityId}`
+    );
+
+    const [todayData] = await Promise.all([
+      fetchQuery(moxieQuery, { entityId, timeframe: "TODAY" }),
+    ]);
+
+    if (todayData.error) {
+      console.log(
+        `Error fetching Today's Moxie earnings data from Airstack for entityId: ${entityId} with error: ${todayData.error}`
+      );
+    } else {
+      if (todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
+        todayEarnings = todayData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0];
+      }
+    }
+
+    console.log(
+      "Airstack API response (Today's Moxie earnings data):",
+      JSON.stringify(
+        {
+          today: todayEarnings,
+        },
+        null,
+        2
+      )
+    );
+
+    console.log(
+      `Fetching Weekly Moxie earnings data from Airstack for entityId: ${entityId}`
+    );
+    const [weeklyData] = await Promise.all([
+      fetchQuery(moxieQuery, { entityId, timeframe: "WEEKLY" }),
+    ]);
+
+    if (weeklyData.error) {
+      console.log(
+        `Error fetching Weekly Moxie earnings data from Airstack for entityId: ${entityId} with error: ${weeklyData.error}`
+      );
+    } else {
+      if (weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
+        weeklyEarnings = weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0];
+      }
+    }
+
+    console.log(
+      "Airstack API response (Weekly Moxie earnings data):",
+      JSON.stringify(
+        {
+          weekly: weeklyEarnings,
+        },
+        null,
+        2
+      )
+    );
+
+    console.log(
+      `Fetching Lifetime Moxie earnings data from Airstack for entityId: ${entityId}`
+    );
+    const [lifetimeData] = await Promise.all([
+      fetchQuery(moxieQuery, { entityId, timeframe: "LIFETIME" }),
+    ]);
+
+    if (lifetimeData.error) {
+      console.log(
+        `Error fetching Lifetime Moxie earnings data from Airstack for entityId: ${entityId} with error: ${lifetimeData.error}`
+      );
+    } else {
+      if (lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat && lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat.length > 0) {
+        lifetimeEarnings = lifetimeData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0];
+      }
     }
 
     console.log(
       "Airstack API response (Moxie earnings data):",
       JSON.stringify(
         {
-          today: todayEarningStat,
-          weekly: weeklyData.data,
-          lifetime: lifetimeData.data,
+          lifetime: lifetimeEarnings,
         },
         null,
         2
@@ -91,12 +138,11 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({
       today:
-        todayEarningStat,
+        todayEarnings,
       weekly:
-        weeklyData.data.FarcasterMoxieEarningStats.FarcasterMoxieEarningStat[0],
+        weeklyEarnings,
       lifetime:
-        lifetimeData.data.FarcasterMoxieEarningStats
-          .FarcasterMoxieEarningStat[0],
+        lifetimeEarnings,
     });
   } catch (error) {
     console.error("Unexpected error:", error);
