@@ -13,6 +13,12 @@ interface MoxieData {
 }
 
 const frameHandler = frames(async (ctx) => {
+
+  console.log("Printing ctx value:", JSON.stringify({
+    url: ctx.url,
+    params: ctx.url.searchParams
+  }));
+
   interface UserData {
     name: string;
     username: string;
