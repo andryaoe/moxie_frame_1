@@ -244,7 +244,7 @@ const frameHandler = frames(async (ctx) => {
         <div tw="flex justify-between bg-blue-800 text-white w-full px-4 py-1 mt-4">
           <div tw="flex text-2xl ">Moxie Stats Frame</div>
 
-          <div tw="flex text-2xl">by @demipoet</div>
+          <div tw="flex text-2xl">by @andryaoe</div>
         </div>
       </div>
     );
@@ -255,7 +255,7 @@ const frameHandler = frames(async (ctx) => {
           (userData as UserData).socialCapitalScore
         } with a rank of ${
           (userData as UserData).socialCapitalRank
-        }! The higher the score, the more my reactions help you earn Moxie. Check out your score on moxie-stats-frame, made by Andryaoe (@andryaoe) spesial thanks for Demipoet (@demipoet)`
+        }! The higher the score, the more my reactions help you earn Moxie. Check out your score on moxie-stats-frame, made by Andryaoe (@andryaoe) spesial thanks for Zenigame (@Zeni.eth)`
       : "Check out your Moxie Far Score!"
   );
 
