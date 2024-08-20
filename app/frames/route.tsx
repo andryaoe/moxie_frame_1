@@ -255,7 +255,7 @@ const frameHandler = frames(async (ctx) => {
           (userData as UserData).socialCapitalScore
         } with a rank of ${
           (userData as UserData).socialCapitalRank
-        }! The higher the score, the more my reactions help you earn Moxie. Check out your score on moxie-stats-frame, made by Demipoet (@demipoet)`
+        }! The higher the score, the more my reactions help you earn Moxie. Check out your score on moxie-stats-frame, made by Andryaoe (@andryaoe) spesial thanks for Demipoet (@demipoet)`
       : "Check out your Moxie Far Score!"
   );
 
